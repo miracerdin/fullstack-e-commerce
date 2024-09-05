@@ -1,0 +1,47 @@
+@import './base.css';
+
+
+#app {
+  max-width: 100%;
+  margin: 0 auto;
+  font-weight: normal;
+}
+
+#app[class='dark'] {
+  --body-bg: rgb(var(--surface-900));
+  --body-text-color: rgb(var(--surface-50));
+  --card-border: 1px solid transparent;
+  --card-bg: rgb(var(--surface-800));
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+a {
+  text-decoration: none;
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    opacity: 0.95;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  #app[class='dark'] {
+    --body-bg: rgb(var(--surface-900));
+    --body-text-color: rgb(var(--surface-50));
+    --card-border: 1px solid transparent;
+    --card-bg: rgb(var(--surface-800));
+    --border-color: rgba(255, 255, 255, 0.1);
+  }
+}
