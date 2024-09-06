@@ -10,7 +10,6 @@
           <i :class="`dark:text-white pi ${iconClass}`" />
         </button>
       </li>
-
     </ul>
   </div>
 </template>
