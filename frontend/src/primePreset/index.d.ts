@@ -1,4 +1,92 @@
+// src/primePreset/index.d.ts
 declare module "./primePreset" {
-    const content: any;
-    export default content;
+    export const PrimePreset: {
+        global: any; // Use specific types if known
+        directives: {
+            tooltip: any; // Use specific types if known
+            ripple: any; // Use specific types if known
+        };
+        autocomplete: any; // Use specific types if known
+        cascadeselect: any; // Use specific types if known
+        checkbox: any; // Use specific types if known
+        colorpicker: any; // Use specific types if known
+        datepicker: any; // Use specific types if known
+        floatlabel: any; // Use specific types if known
+        iconfield: any; // Use specific types if known
+        inputgroup: any; // Use specific types if known
+        inputotp: any; // Use specific types if known
+        inputgroupaddon: any; // Use specific types if known
+        inputmask: any; // Use specific types if known
+        inputnumber: any; // Use specific types if known
+        inputtext: any; // Use specific types if known
+        knob: any; // Use specific types if known
+        listbox: any; // Use specific types if known
+        multiselect: any; // Use specific types if known
+        password: any; // Use specific types if known
+        radiobutton: any; // Use specific types if known
+        rating: any; // Use specific types if known
+        select: any; // Use specific types if known
+        selectbutton: any; // Use specific types if known
+        slider: any; // Use specific types if known
+        textarea: any; // Use specific types if known
+        togglebutton: any; // Use specific types if known
+        toggleswitch: any; // Use specific types if known
+        treeselect: any; // Use specific types if known
+        button: any; // Use specific types if known
+        speeddial: any; // Use specific types if known
+        splitbutton: any; // Use specific types if known
+        datatable: any; // Use specific types if known
+        dataview: any; // Use specific types if known
+        orderlist: any; // Use specific types if known
+        organizationchart: any; // Use specific types if known
+        paginator: any; // Use specific types if known
+        picklist: any; // Use specific types if known
+        tree: any; // Use specific types if known
+        treetable: any; // Use specific types if known
+        timeline: any; // Use specific types if known
+        accordion: any; // Use specific types if known
+        card: any; // Use specific types if known
+        deferred: any; // Use specific types if known
+        divider: any; // Use specific types if known
+        fieldset: any; // Use specific types if known
+        panel: any; // Use specific types if known
+        scrollpanel: any; // Use specific types if known
+        splitter: any; // Use specific types if known
+        stepper: any; // Use specific types if known
+        tabs: any; // Use specific types if known
+        toolbar: any; // Use specific types if known
+        confirmpopup: any; // Use specific types if known
+        confirmdialog: any; // Use specific types if known
+        dialog: any; // Use specific types if known
+        drawer: any; // Use specific types if known
+        popover: any; // Use specific types if known
+        fileupload: any; // Use specific types if known
+        breadcrumb: any; // Use specific types if known
+        contextmenu: any; // Use specific types if known
+        dock: any; // Use specific types if known
+        menu: any; // Use specific types if known
+        menubar: any; // Use specific types if known
+        megamenu: any; // Use specific types if known
+        panelmenu: any; // Use specific types if known
+        tabmenu: any; // Use specific types if known
+        tieredmenu: any; // Use specific types if known
+        message: any; // Use specific types if known
+        toast: any; // Use specific types if known
+        carousel: any; // Use specific types if known
+        galleria: any; // Use specific types if known
+        image: any; // Use specific types if known
+        avatar: any; // Use specific types if known
+        badge: any; // Use specific types if known
+        blockui: any; // Use specific types if known
+        chip: any; // Use specific types if known
+        inplace: any; // Use specific types if known
+        metergroup: any; // Use specific types if known
+        scrolltop: any; // Use specific types if known
+        skeleton: any; // Use specific types if known
+        progressbar: any; // Use specific types if known
+        progressspinner: any; // Use specific types if known
+        tag: any; // Use specific types if known
+        terminal: any; // Use specific types if known
+    };
+    export default { PrimePreset };
 }

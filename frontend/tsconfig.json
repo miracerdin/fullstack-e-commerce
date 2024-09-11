@@ -1,14 +1,12 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.vitest.json"
+    "extends": "@vue/tsconfig/tsconfig.dom.json",
+    "include": ["src/**/*", "src/**/*.vue"],
+    "exclude": ["node_modules", "dist"],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "typeRoots": ["./node_modules/@types", "./src/types"]
     }
-  ]
 }
