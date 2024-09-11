@@ -1,19 +1,12 @@
 {
+    "extends": "@vue/tsconfig/tsconfig.dom.json",
+    "include": ["src/**/*", "src/**/*.vue"],
+    "exclude": ["node_modules", "dist"],
     "compilerOptions": {
-        "target": "es6",
-        "module": "esnext",
-        "moduleResolution": "node",
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "allowJs": true,
-        "declaration": true, // Ensure this is true to generate `.d.ts` files from `.js`
-        "outDir": "./dist",
-        "baseUrl": "./src",
+        "baseUrl": ".",
         "paths": {
-            "@/*": ["./*"]
-        }
-    },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist"]
+            "@/*": ["./src/*"]
+        },
+        "typeRoots": ["./node_modules/@types", "./src/types"]
+    }
 }
