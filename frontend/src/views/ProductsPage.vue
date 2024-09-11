@@ -13,7 +13,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { products } from "../fake-data";
 import { onMounted } from "vue";
 
