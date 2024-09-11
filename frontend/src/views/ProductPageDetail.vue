@@ -2,28 +2,31 @@
     <div class="flex items-center justify-center text-black dark:text-white">
         <div id="page-wrap" class="bg-white dark:bg-gray-800">
             <div id="img-wrap">
-                <img :src="selectedProduct.imageUrl" :alt="selectedProduct.name" />
+                <img :src="selectedProduct?.imageUrl" :alt="selectedProduct?.name" />
             </div>
             <div id="product-details">
-                <h1>{{ selectedProduct.name }}</h1>
-                <h3 id="price">${{ selectedProduct.price }}</h3>
-                <p>Average rating: {{ selectedProduct.averageRating }}</p>
+                <h1>{{ selectedProduct?.name }}</h1>
+                <h3 id="price">${{ selectedProduct?.price }}</h3>
+                <p>Average rating: {{ selectedProduct?.averageRating }}</p>
                 <button id="add-to-cart" @click="addToCart">Add to Cart</button>
                 <h4>Description</h4>
-                <p>{{ selectedProduct.description }}</p>
+                <p>{{ selectedProduct?.description }}</p>
             </div>
         </div>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { products } from "../fake-data";
-import { ref, onMounted, computed } from "vue";
+import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
 const router = useRouter();
 
 const selectedProduct = computed(() => products.find((p) => p.id === route.params.id));
+const addToCart = () => {
+    console.log("add to cart");
+};
 </script>
 <style scoped>
 #page-wrap {
