@@ -1,6 +1,8 @@
 <template>
     <custom-layout column id="page-wrap">
-        <h1>Shopping Cart</h1>
+        <h1 class="text-4xl font-bold border-b border-transparent dark:border-white">
+            Shopping Cart
+        </h1>
         <div v-for="product in cartItems" :key="product.id" class="product-container">
             <img class="product-image" :src="product.imageUrl" :alt="product.name" />
             <div class="details-wrap">
@@ -8,7 +10,13 @@
                 <p class="product-price">${{ product.price }}</p>
             </div>
             <div class="flex justify-center items-center">
-                <custom-button text="Remove" icon="pi-trash" icon-size="12" color="danger" />
+                <custom-button
+                    icon-color="text-white"
+                    text="Remove"
+                    icon="pi-trash"
+                    icon-size="12"
+                    color="danger"
+                />
             </div>
         </div>
         <h3 id="total-price">Total Price: ${{ totalPrice }}</h3>
@@ -17,6 +25,7 @@
             text="Proceed to Checkout"
             icon="pi-check-circle"
             icon-size="12"
+            icon-color="text-white"
             color="success"
         />
     </custom-layout>
@@ -69,9 +78,7 @@ h1 {
     flex: 1;
     margin: auto;
 }
-@media (prefers-color-scheme: dark) {
-    h1 {
-        border-bottom: 1px solid white;
-    }
+#page-wrap {
+    width: 60%;
 }
 </style>

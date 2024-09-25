@@ -1,5 +1,5 @@
 <template>
-    <i class="pi" :class="icon" :style="computedStyle"></i>
+    <i class="pi bg-transparent" :class="`${icon} ${iconColor}`" :style="computedStyle"></i>
 </template>
 <script setup lang="ts">
 import { computed } from "vue";
@@ -18,6 +18,10 @@ const props = defineProps({
     size: {
         type: Number,
         default: 12,
+    },
+    iconColor: {
+        type: String,
+        default: "",
     },
 });
 
