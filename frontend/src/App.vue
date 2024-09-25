@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import Navbar from "@/components/Navbar.vue";
-import CuPageLayout from "@/components/custom/cu-page-layout.vue";
+import CustomPageLayout from "@/components/custom/custom-page-layout.vue";
 </script>
 
 <template>
-    <cu-page-layout>
+    <custom-page-layout>
         <template #header>
             <Navbar />
         </template>
         <div class="content-container dark:bg-gray-800 bg-white">
             <RouterView />
         </div>
-    </cu-page-layout>
+    </custom-page-layout>
 </template>
 
 <style scoped>

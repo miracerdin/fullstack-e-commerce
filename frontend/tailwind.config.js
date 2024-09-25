@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-module.exports= {
-    content: [
-        "./index.html",
-        "./src/**/*.{vue,js,ts,jsx,tsx}",
-    ],
+module.exports = {
+    content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
     theme: {
         extend: {
             colors: {
@@ -31,8 +28,9 @@ module.exports= {
                 "surface-900": "rgb(var(--surface-900))",
                 "surface-950": "rgb(var(--surface-950))",
             },
+            "dark-danger-button": "rgb(var(--danger-color))", // Using a CSS variable
         },
     },
     plugins: [],
-    darkMode: 'selector',
-}
+    darkMode: "class",
+};

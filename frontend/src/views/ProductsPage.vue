@@ -4,10 +4,8 @@
             <img :src="product.imageUrl" :alt="product.name" />
             <h2 class="product-name text-black dark:text-white">{{ product.name }}</h2>
             <p class="text-black dark:text-white">${{ product.price }}</p>
-            <div
-                class="text-black dark:text-white border dark:border-surface-600 hover:dark:bg-neutral-500 hover:bg-green-300 p-2 rounded"
-            >
-                <Button as="router-link" label="View Detail" :to="'/products/' + product.id" />
+            <div>
+                <custom-button text="View Detail" :to="'/products/' + product.id" />
             </div>
         </div>
     </div>
@@ -16,6 +14,7 @@
 <script setup lang="ts">
 import { products } from "../fake-data";
 import { onMounted } from "vue";
+import CustomButton from "@/components/custom/CustomButton.vue";
 
 onMounted(() => {
     console.log(products);

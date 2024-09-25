@@ -18,10 +18,9 @@
 <script setup lang="ts">
 import { products } from "../fake-data";
 import { computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 
 const route = useRoute();
-const router = useRouter();
 
 const selectedProduct = computed(() => products.find((p) => p.id === route.params.id));
 const addToCart = () => {

@@ -1,7 +1,34 @@
 <template>
-    <h1>This is the cart page</h1>
+    <custom-layout column id="page-wrap">
+        <h1>Shopping Cart</h1>
+        <div v-for="product in cartItems" :key="product.id" class="product-container">
+            <img class="product-image" :src="product.imageUrl" :alt="product.name" />
+            <div class="details-wrap">
+                <h3>{{ product.name }}</h3>
+                <p class="product-price">${{ product.price }}</p>
+            </div>
+            <div class="flex justify-center items-center">
+                <custom-button text="Remove" icon="pi-trash" icon-size="12" color="danger" />
+            </div>
+        </div>
+        <h3 id="total-price">Total Price: ${{ totalPrice }}</h3>
+
+        <custom-button
+            text="Proceed to Checkout"
+            icon="pi-check-circle"
+            icon-size="12"
+            color="success"
+        />
+    </custom-layout>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { cartItems } from "@/fake-data";
+import { computed } from "vue";
+import CustomLayout from "@/components/custom/custom-layout.vue";
+import CustomButton from "@/components/custom/CustomButton.vue";
+
+const totalPrice = computed(() => cartItems.reduce((sum, item) => sum + Number(item.price), 0));
+</script>
 <style scoped>
 h1 {
     border-bottom: 1px solid black;
@@ -41,5 +68,10 @@ h1 {
 .remove-button {
     flex: 1;
     margin: auto;
+}
+@media (prefers-color-scheme: dark) {
+    h1 {
+        border-bottom: 1px solid white;
+    }
 }
 </style>
