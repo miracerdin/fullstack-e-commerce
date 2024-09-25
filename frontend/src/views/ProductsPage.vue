@@ -35,10 +35,10 @@ onMounted(() => {
     box-shadow: 0px 2px 5px #888;
     display: flex;
     flex-direction: column;
-    margin-bottom: 2%;
     padding: 20px;
     position: relative;
     width: 32%;
+    margin: 4px;
 }
 
 .product-name {

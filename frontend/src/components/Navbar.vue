@@ -8,6 +8,7 @@ import ThemeSwitcher from "./ThemeSwitcher.vue";
 
 import router from "@/router";
 import type { SelectModel } from "@/types/select-model";
+import CustomButton from "@/components/custom/CustomButton.vue";
 
 const pageList = ref<SelectModel[]>([
     {
@@ -34,6 +35,8 @@ const willPush = (page: string): boolean => router.currentRoute.value.name !== p
 const setIsNavbarCollapsed = () => (isNavbarCollapsed.value = true);
 const pageChanged = (page: string) => {
     if (willPush(page)) router.push({ name: page });
+
+    toggleNavbar();
 };
 
 const setCurrentPageIsActive = () => {
@@ -49,7 +52,9 @@ const handleOutsideClick = (event: MouseEvent) => {
 };
 
 const toggleNavbar = () => (isNavbarCollapsed.value = !isNavbarCollapsed.value);
-
+const gotToLink = (link: string) => {
+    if (willPush(link)) router.push({ name: link });
+};
 onMounted(() => window.addEventListener("click", handleOutsideClick));
 
 watch(
@@ -60,7 +65,6 @@ watch(
     { immediate: true },
 );
 </script>
-
 <template>
     <div
         :class="[
@@ -81,12 +85,14 @@ watch(
                 <IconClose v-else class="cursor-pointer" @click.stop="toggleNavbar()" />
             </span>
         </div>
+
         <ul
             :class="{ hidden: isNavbarCollapsed }"
             class="md:flex md:items-center md:justify-center md:gap-10 md:px-0 px-3 md:pb-0 pb-10 md:static md:w-auto w-full flex-1"
         >
             <li
                 v-for="page in pageList"
+                :key="page.value"
                 :class="{
                     'border-black': page.selected,
                     'border-slate-400': !page.selected,
@@ -97,54 +103,38 @@ watch(
                 <button
                     :class="page.selected ? 'text-black dark:text-white' : 'text-slate-400'"
                     :disabled="page.disabled"
-                    class="text-base font-normal font-['Inter'] leading-normal"
+                    class="text-base font-normal leading-normal"
                     type="button"
-                    @click="pageChanged(`${page.value}`)"
+                    @click="pageChanged(page.value)"
                 >
                     {{ page.text }}
                 </button>
             </li>
         </ul>
+
         <div
             :class="{ hidden: !isNavbarCollapsed }"
             class="justify-end items-center gap-4 flex md:flex md:static"
         >
-            <div class="w-6 h-6 relative -top-3">
+            <div class="w-6 h-6 -top-3 cursor-pointer">
                 <ThemeSwitcher />
             </div>
-            <!--      <div class="md:flex md:flex-row flex-col flex-1 px-3">-->
-
-            <!--        <div-->
-            <!--            class="md:h-6 relative flex-1 md:my-2"-->
-            <!--            title="Sign Up"-->
-            <!--            @click="toggleSignInModal(true)"-->
-            <!--        >-->
-            <!--          <div-->
-            <!--              class="dark:text-white text-black hover:opacity-50 hover:cursor-pointer md:flex hidden"-->
-            <!--          >-->
-            <!--            <IconUser title="Sign Up" @click="toggleSignInModal(true)" />-->
-            <!--            <span>{{ currentUser?.displayName }}</span>-->
-            <!--          </div>-->
-            <!--          <div class="md:hidden flex align-items-center gap-2">-->
-            <!--            <Button-->
-            <!--                class="p-3 w-full text-primary-50 dark:text-white border border-surface-200 dark:border-surface-600 mb-3"-->
-            <!--                label="Sign Up"-->
-            <!--            />-->
-            <!--          </div>-->
-            <!--        </div>-->
-            <!--      </div>-->
-
-            <!--      <SignInModal-->
-            <!--          v-if="isSignInModalVisible"-->
-            <!--          v-model:value="isSignInModalVisible"-->
-            <!--          @input="toggleSignInModal(false)"-->
-            <!--          @onShowToast="showToast"-->
-            <!--      />-->
-            <!--      <CartSidebar-->
-            <!--          v-if="isCartModalVisible"-->
-            <!--          v-model:value="isCartModalVisible"-->
-            <!--          @input="toggleCartModal(false)"-->
-            <!--      />-->
+            <div class="w-6 h-6 cursor-pointer">
+                <custom-button
+                    type="button"
+                    @click="gotToLink('profile')"
+                    icon="pi-user"
+                    color="transparent"
+                />
+            </div>
+            <div class="w-6 h-6 cursor-pointer">
+                <custom-button
+                    type="button"
+                    @click="gotToLink('cart')"
+                    icon="pi-shopping-bag"
+                    color="transparent"
+                />
+            </div>
             <Toast />
         </div>
     </div>

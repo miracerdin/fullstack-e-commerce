@@ -7,7 +7,12 @@
         :type="type"
     >
         <slot>
-            <custom-icon v-if="icon" :icon="icon" :size="iconSize" />
+            <custom-icon
+                v-if="icon"
+                :icon="icon"
+                :size="iconSize"
+                :icon-color="computedIconColor"
+            />
             <span v-if="text !== undefined" :class="{ 'white-space-nowrap': !wrap }">{{
                 text
             }}</span>
@@ -56,27 +61,27 @@ const props = defineProps({
         type: String,
         default: "",
     },
+    wrap: {
+        type: Boolean,
+        default: false,
+    },
+    iconColor: {
+        type: String,
+        default: "",
+    },
 });
 
 const emit = defineEmits(["click"]);
 
 const defaultClass = "custom-button"; // Parent class gelmediğinde kullanılacak default class
 
-const goToLink = async () => {
-    console.log("to", props.to);
-    if (!props.to) return;
-
-    try {
-        await router?.push(props.to);
-    } catch (e) {
-        if (!isNavigationFailure(e, NavigationFailureType.aborted)) throw e;
-    }
-};
-
+const computedIconColor = computed(() => {
+    if (props.iconColor) return props.iconColor;
+    return "text-black dark:text-white";
+});
 const computedClass = computed(() => {
     const propClass = props.class;
     return [
-        defaultClass,
         ...(propClass
             ? Array.isArray(propClass)
                 ? propClass
@@ -85,6 +90,7 @@ const computedClass = computed(() => {
                   : Object.keys(propClass)
             : []), // Parent class yoksa fallback class ekleniyor
         colorClass.value,
+        defaultClass,
     ];
 });
 
@@ -92,9 +98,10 @@ const colorClass = computed(() => {
     const colorMap = {
         primary: "bg-blue-500 text-white hover:bg-blue-600 dark:dark-primary-button",
         danger: "bg-red-500 text-white hover:bg-red-600 dark:dark-danger-button",
-        success: "bg-green-500 text-white hover:bg-green-600",
+        success: "bg-green-500 text-white hover:bg-green-600 dark:dark-success-button",
         warning: "bg-yellow-500 text-black hover:bg-yellow-600",
         info: "bg-indigo-500 text-white hover:bg-indigo-600",
+        transparent: "bg-transparent text-white hover:bg-transparent",
     };
     return colorMap[props.color] || colorMap.primary;
 });
@@ -104,8 +111,14 @@ const computedStyle = computed(() => {
         ...(typeof props.style === "string" ? parseStyleString(props.style) : props.style),
     };
 
+    // Add `!important` only to padding styles if `p-0` or similar is passed
     const importantStyle = Object.fromEntries(
-        Object.entries(baseStyle).map(([key, value]) => [key, `${value} !important`]),
+        Object.entries(baseStyle).map(([key, value]) => {
+            if (key.includes("padding")) {
+                return [key, `${value} !important`];
+            }
+            return [key, value];
+        }),
     );
 
     return importantStyle;
@@ -117,6 +130,17 @@ async function handleClick(event) {
         emit("click", event);
     }
 }
+
+const goToLink = async () => {
+    console.log("to", props.to);
+    if (!props.to) return;
+
+    try {
+        await router?.push(props.to);
+    } catch (e) {
+        if (!isNavigationFailure(e, NavigationFailureType.aborted)) throw e;
+    }
+};
 
 function parseStyleString(styleString) {
     return styleString.split(";").reduce((styles, rule) => {
@@ -134,7 +158,6 @@ function parseStyleString(styleString) {
     color: white;
     border: none;
     border-radius: 4px;
-    padding: 0.5rem 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }

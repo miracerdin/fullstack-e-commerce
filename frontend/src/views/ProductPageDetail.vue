@@ -8,7 +8,12 @@
                 <h1>{{ selectedProduct?.name }}</h1>
                 <h3 id="price">${{ selectedProduct?.price }}</h3>
                 <p>Average rating: {{ selectedProduct?.averageRating }}</p>
-                <button id="add-to-cart" @click="addToCart">Add to Cart</button>
+                <custom-button
+                    class="my-4"
+                    id="add-to-cart"
+                    @click="addToCart"
+                    text="Add to Cart"
+                />
                 <h4>Description</h4>
                 <p>{{ selectedProduct?.description }}</p>
             </div>
@@ -19,6 +24,7 @@
 import { products } from "../fake-data";
 import { computed } from "vue";
 import { useRoute } from "vue-router";
+import CustomButton from "@/components/custom/CustomButton.vue";
 
 const route = useRoute();
 
