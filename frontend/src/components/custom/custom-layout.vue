@@ -2,32 +2,31 @@
     <div
         :class="[
             {
-                'flex-row': row,
-                'flex-column': column,
+                'flex flex-row': row,
+                'flex-col': column,
                 'flex-wrap': wrap,
-                'align-items-center': alignItemsCenter || centerAll,
-                'align-items-end': alignItemsEnd,
-                'align-items-start': alignItemsStart,
-                'align-items-stretch': alignItemsStretch,
-                'justify-content-center': justifyContentCenter || centerAll,
-                'justify-content-end': justifyContentEnd,
-                'justify-content-start': justifyContentStart,
-                'justify-content-between': justifyContentBetween,
-                'justify-content-around': justifyContentAround,
+                'items-center': alignItemsCenter || centerAll,
+                'items-end': alignItemsEnd,
+                'items-start': alignItemsStart,
+                'items-stretch': alignItemsStretch,
+                'justify-center': justifyContentCenter || centerAll,
+                'justify-end': justifyContentEnd,
+                'justify-start': justifyContentStart,
+                'justify-between': justifyContentBetween,
+                'justify-around': justifyContentAround,
             },
-            gutter ? `co-gutter__${gutter}` : '',
             $attrs.class || '',
         ]"
-        :style="($attrs.style || {}) as StyleValue"
-        class="d-flex"
+        :style="$attrs.style"
         v-bind="$attrs"
+        class="flex text-black dark:text-white"
     >
         <slot></slot>
     </div>
 </template>
 
 <script setup lang="ts">
-import { type StyleValue, useAttrs } from "vue";
+import { useAttrs } from "vue";
 
 const props = defineProps({
     row: { type: Boolean, default: false },
