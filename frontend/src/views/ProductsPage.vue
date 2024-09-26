@@ -4,8 +4,12 @@
             <img :src="product.imageUrl" :alt="product.name" />
             <h2 class="product-name text-black dark:text-white">{{ product.name }}</h2>
             <p class="text-black dark:text-white">${{ product.price }}</p>
-            <div>
-                <custom-button text="View Detail" :to="'/products/' + product.id" />
+            <div class="w-full flex justify-center">
+                <custom-button
+                    text="View Detail"
+                    :to="'/products/' + product.id"
+                    class="p-2 mt-1 w-[85%]"
+                />
             </div>
         </div>
     </div>

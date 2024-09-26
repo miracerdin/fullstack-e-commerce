@@ -16,7 +16,7 @@ const props = defineProps({
         },
     },
     size: {
-        type: Number,
+        type: [String, Number],
         default: 12,
     },
     iconColor: {

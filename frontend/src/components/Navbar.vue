@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref, shallowRef, watch } from "vue";
+import { onMounted, ref, shallowRef, watch } from "vue";
 
 import IconClose from "./icons/IconClose.vue";
-import IconUser from "../components/icons/IconUser.vue";
 import IconMenu from "./icons/IconMenu.vue";
 import ThemeSwitcher from "./ThemeSwitcher.vue";
 
@@ -10,7 +9,7 @@ import router from "@/router";
 import type { SelectModel } from "@/types/select-model";
 import CustomButton from "@/components/custom/CustomButton.vue";
 
-const pageList = ref<SelectModel[]>([
+const pageList = ref<SelectModel<string>[]>([
     {
         text: "Products",
         value: "products",
@@ -28,7 +27,6 @@ const pageList = ref<SelectModel[]>([
     },
 ]);
 
-const isCartModalVisible = shallowRef(false);
 const isNavbarCollapsed = shallowRef(true);
 const willPush = (page: string): boolean => router.currentRoute.value.name !== page;
 

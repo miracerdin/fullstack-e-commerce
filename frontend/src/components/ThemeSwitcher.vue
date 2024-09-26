@@ -15,10 +15,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import CustomButton from "@/components/custom/CustomButton.vue";
 const iconClass = ref("pi-moon");
 
+onMounted(() => {
+    setSystemTheme();
+});
 const setSystemTheme = () => {
     const root = document.getElementsByTagName("html")[0];
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -26,7 +29,6 @@ const setSystemTheme = () => {
         iconClass.value = iconClass.value === "pi-moon" ? "pi-sun" : "pi-moon";
     }
 };
-setSystemTheme();
 
 const onThemeToggler = () => {
     const root = document.getElementsByTagName("html")[0];
