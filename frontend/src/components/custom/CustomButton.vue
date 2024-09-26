@@ -20,23 +20,20 @@
     </button>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { computed } from "vue";
+import type { PropType } from "vue";
 import CustomIcon from "@/components/custom/CustomIcon.vue";
 import { isNavigationFailure, NavigationFailureType } from "vue-router";
 import router from "@/router";
 
 const props = defineProps({
-    label: {
-        type: String,
-        default: "",
-    },
     icon: {
         type: String,
         default: "",
     },
     type: {
-        type: String,
+        type: String as PropType<"button" | "submit" | "reset">,
         default: "button",
     },
     disabled: {
@@ -50,7 +47,7 @@ const props = defineProps({
         default: "",
     },
     iconSize: {
-        type: Number,
+        type: [String, Number],
         default: 12,
     },
     color: {
@@ -94,8 +91,11 @@ const computedClass = computed(() => {
     ];
 });
 
-const colorClass = computed(() => {
-    const colorMap = {
+const colorClass = computed((): string => {
+    const colorMap: Record<
+        "primary" | "danger" | "success" | "warning" | "info" | "transparent",
+        string
+    > = {
         primary: "bg-blue-500 text-white hover:bg-blue-600 dark:dark-primary-button",
         danger: "bg-red-500 text-white hover:bg-red-600 dark:dark-danger-button",
         success: "bg-green-500 text-white hover:bg-green-600 dark:dark-success-button",
@@ -103,28 +103,22 @@ const colorClass = computed(() => {
         info: "bg-indigo-500 text-white hover:bg-indigo-600",
         transparent: "bg-transparent text-white hover:bg-transparent",
     };
-    return colorMap[props.color] || colorMap.primary;
+    return colorMap[props.color as keyof typeof colorMap] || colorMap.primary;
 });
 
 const computedStyle = computed(() => {
-    const baseStyle = {
-        ...(typeof props.style === "string" ? parseStyleString(props.style) : props.style),
-    };
+    const baseStyle =
+        typeof props.style === "string" ? parseStyleString(props.style) : props.style || {};
 
-    // Add `!important` only to padding styles if `p-0` or similar is passed
-    const importantStyle = Object.fromEntries(
+    // Ensure all style properties are strings
+    return Object.fromEntries(
         Object.entries(baseStyle).map(([key, value]) => {
-            if (key.includes("padding")) {
-                return [key, `${value} !important`];
-            }
-            return [key, value];
+            return [key, typeof value === "string" ? value : `${value}`];
         }),
     );
-
-    return importantStyle;
 });
 
-async function handleClick(event) {
+async function handleClick(event: Event) {
     if (!props.disabled) {
         await goToLink();
         emit("click", event);
@@ -132,7 +126,6 @@ async function handleClick(event) {
 }
 
 const goToLink = async () => {
-    console.log("to", props.to);
     if (!props.to) return;
 
     try {
@@ -142,14 +135,16 @@ const goToLink = async () => {
     }
 };
 
-function parseStyleString(styleString) {
-    return styleString.split(";").reduce((styles, rule) => {
-        const [property, value] = rule.split(":").map((part) => part.trim());
-        if (property && value) {
-            styles[property] = value;
-        }
-        return styles;
-    }, {});
+function parseStyleString(styleString: string | undefined): Record<string, string> {
+    return (
+        styleString?.split(";").reduce<Record<string, string>>((styles, rule) => {
+            const [property, value] = rule.split(":").map((part) => part.trim());
+            if (property && value) {
+                styles[property] = value;
+            }
+            return styles;
+        }, {}) || {}
+    );
 }
 </script>
 

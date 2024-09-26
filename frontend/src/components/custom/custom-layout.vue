@@ -17,7 +17,7 @@
             },
             $attrs.class || '',
         ]"
-        :style="$attrs.style"
+        :style="$attrs.style as StyleValue"
         v-bind="$attrs"
         class="flex text-black dark:text-white"
     >
@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+import type { StyleValue } from "vue";
 import { useAttrs } from "vue";
 
 const props = defineProps({

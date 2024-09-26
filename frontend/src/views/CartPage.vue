@@ -16,6 +16,7 @@
                     icon="pi-trash"
                     icon-size="12"
                     color="danger"
+                    class="p-2"
                 />
             </div>
         </div>
@@ -27,6 +28,7 @@
             icon-size="12"
             icon-color="text-white"
             color="success"
+            class="p-2"
         />
     </custom-layout>
 </template>
